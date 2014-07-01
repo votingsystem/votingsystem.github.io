@@ -11,74 +11,77 @@
 @status alpha
 @homepage http://jgzornoza.github.io/votingsystem-texteditor
 -->
-<polymer-element name="votingsystem-texteditor" attributes="type">
-  <template>
-    <link rel="stylesheet" href="votingsystem-texteditor.css" />
-    
-    <h1>Hello from votingsystem-texteditor</h1>
-      <div id="internalcontainer"></div>
+<polymer-element name="votingsystem-texteditor" attributes="notitle author">
+    <template>
+        <link rel="stylesheet" href="votingsystem-texteditor.css" />
 
-  </template>
+        <h1>Hello from votingsystem-texteditor</h1>
+        <div id="internalcontainer"></div>
 
-  <script>
-      var editor
-      var editorConfig = { toolbar: [[ 'Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
-          [ 'FontSize', 'TextColor', 'BGColor' ]]}
+    </template>
 
-    Polymer('votingsystem-texteditor', {
-      /**
-       * @attribute author
-       * @type string
-       */
-      author: 'jgzornoza',
-      
-      /**
-       * `fancy` is a property that does something fancy.
-       * 
-       * @property fancy
-       * @type bool
-       */
-      fancy: false,
+    <script>
 
-      ready: function() {
-        // Ready is a lifecycle callback.
-        // You can do setup work in here.
-        // More info: http://www.polymer-project.org/docs/polymer/polymer.html#lifecyclemethods
-          console.log("======= ready")
-          var editor =  CKEDITOR.appendTo( this.$.internalcontainer, editorConfig);
+        var editorConfig = { toolbar: [[ 'Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
+            [ 'FontSize', 'TextColor', 'BGColor' ]]}
 
-      },
+        Polymer('votingsystem-texteditor', {
+            /**
+             * The `author` attribute sets an initial author
+             *
+             * @attribute author
+             * @type string
+             */
+            author: 'Dimitri Glazkov',
 
-      /**
-       * The `sayHello` method will return a greeting
-       * 
-       * @method sayHello
-       * @return {String} Returns a string greeting.
-       * @param {String} greeting Pass in a specific greeting
-       */
-      sayHello: function(greeting) {
-        var response = greeting || 'Hello World!';
-        return 'votingsystem-texteditor says, ' + response;
-      },
+            /**
+             * `fancy` is a property that does something fancy.
+             *
+             * @property fancy
+             * @type bool
+             */
+            fancy: false,
 
-      /**
-       * @method getData
-       * @return {String} The editor data.
-       */
-      getData: function() {
-          return editor.getData().trim()
-      },
+            ready: function() {
+                // Ready is a lifecycle callback.
+                // You can do setup work in here.
+                // More info: http://www.polymer-project.org/docs/polymer/polymer.html#lifecyclemethods
+                console.log("======= ready")
+                var editor =  CKEDITOR.appendTo( this.$.internalcontainer, editorConfig);
 
-        /**
-         * @method setData
-         * @param {String} the data to show on editor
-         */
-        setData: function(data) {
-            editor.insertHtml(data);
-        }
+            },
 
-    });
+            /**
+             * The `sayHello` method will return a greeting
+             *
+             * @method sayHello
+             * @return {String} Returns a string greeting.
+             * @param {String} greeting Pass in a specific greeting
+             */
+            sayHello: function(greeting) {
+                var response = greeting || 'Hello World!';
+                return 'votingsystem-texteditor says, ' + response;
+            },
 
-  </script>
+            /**
+             * The `votingsystem-texteditor-lasers-success` event is fired whenever we
+             * call fireLasers.
+             *
+             * @event votingsystem-texteditor-lasers-success
+             */
+
+            /**
+             * The `fireLasers` method will fire the lasers. At least
+             * it will dispatch an event that claims lasers were fired :)
+             *
+             * @method fireLasers
+             */
+            fireLasers: function() {
+                this.fire('votingsystem-texteditor-lasers-success', { sound: 'Pew pew pew!' });
+            }
+
+        });
+
+    </script>
 
 </polymer-element>
