@@ -4,11 +4,11 @@
   "authors": [
     "JJ <jgzornoza@gmail.com>"
   ],
-  "description": "Element providing solution to no problem in particular.",
-  "keywords": "seed, polymer, web-components",
+  "description": "Voting system text editor",
+  "keywords": "voting-system, web-components",
   "main": "votingsystem-texteditort.html",
   "license": "Licensed under the Apache License, Version 2.0",
-  "homepage": "https://github.com/jgzornoza/votingsystem-texteditor/",
+  "homepage": "https://github.com/votingsystem/votingsystem-texteditor",
   "ignore": [
     "**/.*"
   ],
