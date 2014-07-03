@@ -1,12 +1,12 @@
 {
   "name": "votingsystem-texteditor",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "authors": [
     "JJ <jgzornoza@gmail.com>"
   ],
   "description": "Voting system text editor",
   "keywords": "voting-system, web-components",
-  "main": "votingsystem-texteditort.html",
+  "main": "votingsystem-texteditor.html",
   "license": "Licensed under the Apache License, Version 2.0",
   "homepage": "https://github.com/votingsystem/votingsystem-texteditor",
   "ignore": [
@@ -18,13 +18,13 @@
     "chai": "~1.9.1",
     "mocha": "~1.19.0"
   },
-  "_release": "0.2.0",
+  "_release": "0.2.2",
   "_resolution": {
     "type": "version",
-    "tag": "0.2.0",
-    "commit": "f49c6974ce278849c9b67097fd7b69c570b80646"
+    "tag": "0.2.2",
+    "commit": "a3b2f51067768aa84e2186b30879cd3fcbbbfde1"
   },
   "_source": "git://github.com/votingsystem/votingsystem-texteditor.git",
-  "_target": "~0.2.0",
+  "_target": "~0.2.2",
   "_originalSource": "votingsystem-texteditor"
 }

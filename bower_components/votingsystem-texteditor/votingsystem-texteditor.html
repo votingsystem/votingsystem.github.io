@@ -7,6 +7,7 @@
     <votingsystem-texteditor></votingsystem-texteditor>
 
 @element votingsystem-texteditor
+@blurb Element providing solution to no problem in particular.
 @status alpha
 @homepage http://jgzornoza.github.io/votingsystem-texteditor
 -->
@@ -26,21 +27,21 @@
       author: 'jgzornoza',
       
       /**
-       * `data` editor content.
+       * `fancy` is a property that does something fancy.
        * 
-       * @property data
-       * @type string
+       * @property fancy
+       * @type bool
        */
-      data: null,
+      data: '',
 
       ready: function() {
-          if('mobile' == this.type) editorConfig = { toolbar: [[ 'Bold', 'Italic', '-', 'NumberedList', 'BulletedList',
+          if('mobile' == this.type) this.editorConfig = { toolbar: [[ 'Bold', 'Italic', '-', 'NumberedList', 'BulletedList',
                 '-', 'Link', 'Unlink' ], [ 'FontSize', 'TextColor', 'BGColor' ]]}
           else {
-              editorConfig = { toolbar: [[ 'Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
+              this.editorConfig = { toolbar: [[ 'Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
                   [ 'FontSize', 'TextColor', 'BGColor' ]]}
           }
-          this.editor =  CKEDITOR.appendTo( this.$.internalcontainer, editorConfig);
+          this.editor =  CKEDITOR.appendTo( this.$.internalcontainer, this.editorConfig);
           CKEDITOR.on('instanceReady',function( ev ) {
               if(this.data != null) {
                   this.editor.insertHtml(this.data);
