@@ -1,0 +1,105 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+Element to make websocket connections
+
+https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
+
+##### Example
+
+    <votingsystem-socket></votingsystem-socket>
+
+@element votingsystem-socket
+@blurb Element providing solution to no problem in particular.
+@status alpha
+@homepage http://votingsystem.github.io/votingsystem-socket
+-->
+<polymer-element name="votingsystem-socket" attributes="url">
+  <template>
+    <link rel="stylesheet" href="votingsystem-socket.css" />
+    <content></content>
+  </template>
+
+  <script>
+
+    Polymer('votingsystem-socket', {
+      /**
+       * The `url` of the socket service
+       * 
+       * @attribute url
+       * @type string
+       */
+      url: null,
+
+      websocket:null,
+      message:null,
+
+     urlChanged:function() {
+         var socketvs = this
+         if(this.url == null || "" == this.url) return
+         this.log("connecting to: " + this.url)
+         try {
+             if ('WebSocket' in window) {
+                 this.websocket = new WebSocket(this.url);
+             } else if ('MozWebSocket' in window) {
+                 this.websocket = new MozWebSocket(this.url);
+             } else {
+                 this.log("Browser without socket support")
+                 return;
+             }
+         } catch(ex) {this.log(ex)}
+
+         this.websocket.onopen = function () {
+             socketvs.log('Info: WebSocket connection opened.');
+             if(socketvs.message != null) {
+                 socketvs.log('Sending pending message');
+                 socketvs.sendMessage(socketvs.message)
+                 socketvs.message = null
+             }
+         };
+         this.websocket.onmessage = function (event) {
+             socketvs.log('Received: ' + event.data);
+             socketvs.onMessage(JSON.parse(event.data))
+         };
+         this.websocket.onclose = function (event) {
+             socketvs.log('Info: WebSocket connection closed, Code: ' + event.code + (event.reason == "" ? "" : ", Reason: " + event.reason));
+         };
+     },
+
+        log:function(message) {
+            console.log(this.tagName + " - " + this.id +" - " + message)
+        },
+
+      ready: function() { },
+
+      /**
+       * The `sendMessage` method will send a message to the websocket service
+       * 
+       * @method sendMessage
+       * @param {String} message The message to send
+       */
+      sendMessage: function(message) {
+          try {
+              this.websocket.send(message);
+          } catch(ex) {
+            this.log(ex)
+            this.message = message
+          }
+      },
+
+      /**
+       * The `fireLasers` method will fire the lasers. At least
+       * it will dispatch an event that claims lasers were fired :)
+       * 
+       * @method fireLasers
+       */
+      onMessage: function(data) {
+        this.fire('on-message', data);
+      }
+
+    });
+
+
+  </script>
+
+</polymer-element>
